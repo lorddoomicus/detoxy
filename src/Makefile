@@ -1,7 +1,7 @@
 CC=gcc
-OBJS=detox64.o
+OBJS=detoxy.o
 CFLAGS=-Wall -O2 -pedantic -ansi
-TARGET=detox64
+TARGET=detoxy
 
 .c.o:	$(CC) -c $*.c
 

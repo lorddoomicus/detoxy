@@ -1,35 +1,38 @@
 
-DETOX64 v0.9
+DETOXY v0.1
 ==================================================================
-This was just a quick hack to batch convert some old C64 BASIC progams,
-without having to go by a C64 emulator.  Support for other formats will
-be implemented on request.
-
+detoxy is a simple and portable detokenizer for Commodore BASIC programs.  
+It supports the extensions .bas (BASIC 2.0 and BASIC 3.5) and 
+.p00 (C64 emulator, VICE) - other BASIC versions will be implemented 
+in the future.
 
 AUTHOR
 ==================================================================
-detox64 was written by Stian Soreng
-http://freshmeat.net/projects/detox64
+detoxy was written by Derrik Walker, https://www.doomd.net
 
+And was forked and derived from detox64 by Stian Soreng
+http://freshmeat.net/projects/detox64
 
 EXAMPLE USAGE
 ==================================================================
 For processing a standard C64 BASIC file, just type:
 
-        detox64 myfile.bas
+        detoxy myfile.bas
 
 If you saved the BASIC file from inside an emulator, for example VICE,
 the file extension might be "p00".  In this case, the file has an extended
 header which begins with "C64File", and it can be skipped by issuing the
 following parameter:
 
-        detox64 -f p00 myfile.p00
+        detoxy -f p00 myfile.p00
 
 The parameter "-f bas" is currently redundant, but is provided for
 future use.
 
+To display the detected BASIC version at the beginning of the output:
+
+	detoxy -p myfile.bas
 
 TEST FILES
 ==================================================================
-The directory "tests" provides a few sample files for testing detox64.
-
+The directory "tests" provides a few sample files for testing detoxy.
