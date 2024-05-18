@@ -31,7 +31,7 @@ future use.
 
 To display the detected BASIC version at the beginning of the output:
 
-	detoxy -p myfile.bas
+	detoxy -b myfile.bas
 
 TEST FILES
 ==================================================================
