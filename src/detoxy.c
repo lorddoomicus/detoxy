@@ -21,6 +21,7 @@
  *
  * 2024-05-11   dwalker		Initial version
  * 2024-05-25	dwalker		Added support for BASIC 3.5 with graphics
+ * 2024-05-26	dwalker		Added ViC 20 support
  */
 
 #include <stdio.h>
@@ -138,19 +139,19 @@ int main( int argc, char **argv ) {
 	/* The Load location to find the BASIC version */
 	switch ( ( getByte(fp))|(getByte(fp)<<8 ) ) {
 
-		case 0x0801:	/* BASIC 2.0 on the C64 */
+		case 0x0801:	/* BASIC 2.0 on the Commodore 64 */
 			if( print_basic_ver ) 
-				printf( "BASIC 2.0\n");
+				printf( "BASIC 2.0 on a C64\n");
 			break;
 
-		case 0x1001:	/* BASIC 3.5 on a TED without high-res graphics */
+		case 0x1001:	/* BASIC 2.0 on a VIC 20 or BASIC 3.5 on a TED without high-res graphics */
 			if( print_basic_ver ) 
-				printf( "BASIC 3.5\n" );
+				printf( "BASIC 2.0 on a VIC 20 or BASIC 3.5 TED without high-res graphics\n" );
 			break;
 
 		case 0x4001:	/* BASIC 3.5 on a TED with high-res graphics */
 			if( print_basic_ver ) 
-				printf( "BASIC 3.5\n" );
+				printf( "BASIC 3.5 TED with high-res graphics\n" );
 			break;
 
 		default:

@@ -2,16 +2,21 @@
 DETOXY v0.1
 ==================================================================
 detoxy is a simple and portable detokenizer for Commodore BASIC programs.  
-It supports the extensions .bas (BASIC 2.0 and BASIC 3.5) and 
-.p00 (C64 emulator, VICE) - other BASIC versions will be implemented 
-in the future.
+
+It currently supports the extensions .bas for the following systems:
+
+- BASIC 2.0 on the Vic20 
+- BASIC 2.0 on C64 
+- BASIC 3.5 on TED based systems 
+
+It also supports .p00 from VICE.  Other BASIC versions and formats will be likely implemented in the future.
+
 
 AUTHOR
 ==================================================================
 detoxy was written by Derrik Walker, https://www.doomd.net
 
-And was forked and derived from detox64 by Stian Soreng
-http://freshmeat.net/projects/detox64
+And was forked and derived from detox64 by Stian Soreng http://freshmeat.net/projects/detox64
 
 EXAMPLE USAGE
 ==================================================================
@@ -19,17 +24,13 @@ For processing a standard C64 BASIC file, just type:
 
         detoxy myfile.bas
 
-If you saved the BASIC file from inside an emulator, for example VICE,
-the file extension might be "p00".  In this case, the file has an extended
-header which begins with "C64File", and it can be skipped by issuing the
-following parameter:
+If you saved the BASIC file from inside an emulator, for example VICE, the file extension might be "p00".  In this case, the file has an extended header which begins with "C64File", and it can be skipped by issuing the following parameter:
 
         detoxy -f p00 myfile.p00
 
-The parameter "-f bas" is currently redundant, but is provided for
-future use.
+The parameter "-f bas" is currently redundant, but is provided for future use.
 
-To display the detected BASIC version at the beginning of the output:
+To display information about the detected BASIC version at the beginning of the output:
 
 	detoxy -b myfile.bas
 
