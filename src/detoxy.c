@@ -12,19 +12,24 @@
  * This is licensed for use under the GNU General Public License v2
  *
  * Forked from detox64 by Stian Soreng, https://github.com/vroby65/detox64
+ *
  * Changes from original:
- *	- Added all the tokens for BASIC 3.5
+ *	- Added all the tokens and other code for BASIC 3.5
  *	- Updated to use getopts for argument processing
  *	- Added an argument for displaying the BASIC version
  *	- A couple bug fixes and a little code clean up
  *
- * 2024/05/11   dwalker		Initial version
+ * 2024-05-11   dwalker		Initial version
+ * 2024-05-25	dwalker		Added support for BASIC 3.5 with graphics
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#define TRUE 1
+#define FALSE 0
 
 char *tokens[] = {
 	"END", "FOR", "NEXT", "DATA", "INPUT#", "INPUT", "DIM", "READ",
@@ -49,7 +54,7 @@ unsigned char getByte( FILE *fp ) {
 	unsigned char in = 0x00;
 
 	if( fp ) 
-		(void) fread( &in, 1, 1, fp );
+		( void )fread( &in, 1, 1, fp );
 	return( in );
 }
 
@@ -72,8 +77,8 @@ int main( int argc, char **argv ) {
 
 	unsigned int lineno = 0;
 	FILE *fp;
-	int input_type=0;
-	int print_basic_ver=0;
+	int input_type = 0;
+	int print_basic_ver = FALSE;
 	int opts;
 	opterr = 0;
 
@@ -82,7 +87,7 @@ int main( int argc, char **argv ) {
 		switch( opts ) {
 
 			case 'b':
-				print_basic_ver = 1;
+				print_basic_ver = TRUE;
 				break;
 
 			case 'f':
@@ -130,14 +135,20 @@ int main( int argc, char **argv ) {
 		}
 	}
 
+	/* The Load location to find the BASIC version */
 	switch ( ( getByte(fp))|(getByte(fp)<<8 ) ) {
 
-		case 0x0801:
+		case 0x0801:	/* BASIC 2.0 on the C64 */
 			if( print_basic_ver ) 
 				printf( "BASIC 2.0\n");
 			break;
 
-		case 0x1001:
+		case 0x1001:	/* BASIC 3.5 on a TED without high-res graphics */
+			if( print_basic_ver ) 
+				printf( "BASIC 3.5\n" );
+			break;
+
+		case 0x4001:	/* BASIC 3.5 on a TED with high-res graphics */
 			if( print_basic_ver ) 
 				printf( "BASIC 3.5\n" );
 			break;
